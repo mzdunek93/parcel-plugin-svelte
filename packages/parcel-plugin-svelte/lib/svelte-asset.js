@@ -5,6 +5,10 @@ class SvelteAsset extends Asset {
   constructor(name, pkg, options) {
     super(name, pkg, options);
     this.type = 'js';
+    this.globalConfig = Object.keys(pkg.env)
+      .filter((key) => key.indexOf('SVELTE_') === 0)
+      .map((key) => ({ [key.substr(7).toLowerCase().replace(/(\-\w)/g, (m) => m[1].toUpperCase())]: pkg.env[key] }))
+      .reduce((acc, entry) => ({ ...acc, ...entry }), {})
   }
 
   async getConfig() {
@@ -21,7 +25,7 @@ class SvelteAsset extends Asset {
     // because otherwise it can break the compilation process.
     // Note: "compilerOptions" is deprecated and replaced by compiler.
     // Since the depracation didnt take effect yet, we still support the old way.
-    const compiler = { ...customOptions.compilerOptions, ...customOptions.compiler, ...parcelCompilerOptions };
+    const compiler = { ...customOptions.compilerOptions, ...customOptions.compiler, ...this.globalConfig, ...parcelCompilerOptions };
     const preprocess = customOptions.preprocess;
 
     return { compiler, preprocess };
