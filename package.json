@@ -1,0 +1,24 @@
+{
+  "name": "parcel-plugin-svelte",
+  "version": "4.0.6",
+  "description": "Parcel plugin to support svelte",
+  "main": "lib/main.js",
+  "author": "Jasper De Moor",
+  "license": "ISC",
+  "keywords": [
+    "parcel",
+    "svelte"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DeMoorJasper/parcel-plugin-svelte.git"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "peerDependencies": {
+    "parcel-bundler": "^1.11.0",
+    "svelte": "^3.0.0"
+  },
+  "gitHead": "757d10fe650d8924c21bfe94d83b2c58635b737b"
+}
